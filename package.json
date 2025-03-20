@@ -37,6 +37,7 @@
 		"node": ">= 10"
 	},
 	"scripts": {
+		"prepare": "npm run build",
 		"artifacts": "napi artifacts",
 		"build": "napi build --platform --js=rs.cjs --release --pipe \"prettier -w\"",
 		"build:debug": "napi build --platform --pipe \"prettier -w\"",
