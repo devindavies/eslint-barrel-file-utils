@@ -1,3 +1,3 @@
-# `eslint-barrel-file-utils-linux-x64-musl`
+# `@devinmdavies/eslint-barrel-file-utils-linux-x64-musl`
 
-This is the **x86_64-unknown-linux-musl** binary for `eslint-barrel-file-utils`
+This is the **x86_64-unknown-linux-musl** binary for `@devinmdavies/eslint-barrel-file-utils`

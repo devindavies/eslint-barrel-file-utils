@@ -1,6 +1,6 @@
 {
-  "name": "eslint-barrel-file-utils-freebsd-x64",
-  "version": "0.0.8",
+  "name": "@devinmdavies/eslint-barrel-file-utils-freebsd-x64",
+  "version": "0.0.15",
   "os": [
     "freebsd"
   ],
@@ -24,9 +24,5 @@
   "engines": {
     "node": ">= 10"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
-  "repository": "git@github.com:thepassle/eslint-barrel-file-utils.git"
+  "repository": "git@github.com:devindavies/eslint-barrel-file-utils.git"
 }

@@ -1,14 +1,11 @@
 {
-  "name": "eslint-barrel-file-utils-linux-arm64-gnu",
-  "version": "0.0.8",
+  "name": "@devinmdavies/eslint-barrel-file-utils-linux-arm64-gnu",
+  "version": "0.0.15",
   "os": [
     "linux"
   ],
   "cpu": [
     "arm64"
-  ],
-  "libc": [
-    "glibc"
   ],
   "main": "eslint-barrel-file-utils.linux-arm64-gnu.node",
   "files": [
@@ -27,9 +24,8 @@
   "engines": {
     "node": ">= 10"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
-  "repository": "git@github.com:thepassle/eslint-barrel-file-utils.git"
+  "repository": "git@github.com:devindavies/eslint-barrel-file-utils.git",
+  "libc": [
+    "glibc"
+  ]
 }
