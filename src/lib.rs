@@ -91,20 +91,21 @@ pub fn is_barrel_file_rs(
 }
 
 fn create_tsconfig_option(
-  config_file: String, 
-  tsconfig_references: Option<Vec<String>>
+  config_file: String,
+  tsconfig_references: Option<Vec<String>>,
 ) -> TsconfigOptions {
   TsconfigOptions {
     config_file: PathBuf::from(config_file),
     references: match tsconfig_references {
       None => TsconfigReferences::Auto,
-      Some(refs) => TsconfigReferences::Paths(refs.into_iter().map(PathBuf::from).collect())
-    } 
+      Some(refs) => TsconfigReferences::Paths(refs.into_iter().map(PathBuf::from).collect()),
+    },
   }
 }
 
 fn create_alias_option(aliases: Vec<(String, Vec<String>)>) -> Vec<(String, Vec<AliasValue>)> {
-  aliases.into_iter()
+  aliases
+    .into_iter()
     .map(|(key, val)| {
       let mapped_alias = if val.is_empty() {
         vec![AliasValue::Ignore]
@@ -132,12 +133,10 @@ pub fn count_module_graph_size_rs(
 ) -> Result<i32> {
   let tsconfig = match tsconfig_config_file {
     None => None,
-    _ => Some(
-      create_tsconfig_option(
-        tsconfig_config_file.unwrap(), 
-        tsconfig_references
-      )
-    )
+    _ => Some(create_tsconfig_option(
+      tsconfig_config_file.unwrap(),
+      tsconfig_references,
+    )),
   };
 
   let alias_options = create_alias_option(alias);
@@ -163,7 +162,16 @@ pub fn count_module_graph_size_rs(
   }
 
   while let Some(dep) = modules.pop() {
-    let source = std::fs::read_to_string(PathBuf::from(&base_path).join(&dep)).unwrap();
+    let source = match std::fs::read_to_string(PathBuf::from(&base_path).join(&dep)) {
+      Ok(source) => source,
+      Err(_) => {
+        return Err(Error::new(
+          GenericFailure,
+          format!("Failed to read file: \"{}{}\"", &base_path, &dep.display()),
+        ));
+      }
+    };
+
     let allocator = Allocator::default();
     let path = PathBuf::from(&base_path).join(&dep);
     if path.extension().unwrap() == "css" || path.extension().unwrap() == "json" {
