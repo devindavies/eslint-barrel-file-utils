@@ -32,10 +32,10 @@ switch (platform) {
   case 'android':
     switch (arch) {
       case 'arm64':
-        localFileExisted = existsSync(join(__dirname, 'index.android-arm64.node'))
+        localFileExisted = existsSync(join(__dirname, '@devinmdavies/eslint-barrel-file-utils.android-arm64.node'))
         try {
           if (localFileExisted) {
-            nativeBinding = require('./index.android-arm64.node')
+            nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.android-arm64.node')
           } else {
             nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-android-arm64')
           }
@@ -44,10 +44,10 @@ switch (platform) {
         }
         break
       case 'arm':
-        localFileExisted = existsSync(join(__dirname, 'index.android-arm-eabi.node'))
+        localFileExisted = existsSync(join(__dirname, '@devinmdavies/eslint-barrel-file-utils.android-arm-eabi.node'))
         try {
           if (localFileExisted) {
-            nativeBinding = require('./index.android-arm-eabi.node')
+            nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.android-arm-eabi.node')
           } else {
             nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-android-arm-eabi')
           }
@@ -62,10 +62,10 @@ switch (platform) {
   case 'win32':
     switch (arch) {
       case 'x64':
-        localFileExisted = existsSync(join(__dirname, 'index.win32-x64-msvc.node'))
+        localFileExisted = existsSync(join(__dirname, '@devinmdavies/eslint-barrel-file-utils.win32-x64-msvc.node'))
         try {
           if (localFileExisted) {
-            nativeBinding = require('./index.win32-x64-msvc.node')
+            nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.win32-x64-msvc.node')
           } else {
             nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-win32-x64-msvc')
           }
@@ -74,10 +74,10 @@ switch (platform) {
         }
         break
       case 'ia32':
-        localFileExisted = existsSync(join(__dirname, 'index.win32-ia32-msvc.node'))
+        localFileExisted = existsSync(join(__dirname, '@devinmdavies/eslint-barrel-file-utils.win32-ia32-msvc.node'))
         try {
           if (localFileExisted) {
-            nativeBinding = require('./index.win32-ia32-msvc.node')
+            nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.win32-ia32-msvc.node')
           } else {
             nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-win32-ia32-msvc')
           }
@@ -86,10 +86,10 @@ switch (platform) {
         }
         break
       case 'arm64':
-        localFileExisted = existsSync(join(__dirname, 'index.win32-arm64-msvc.node'))
+        localFileExisted = existsSync(join(__dirname, '@devinmdavies/eslint-barrel-file-utils.win32-arm64-msvc.node'))
         try {
           if (localFileExisted) {
-            nativeBinding = require('./index.win32-arm64-msvc.node')
+            nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.win32-arm64-msvc.node')
           } else {
             nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-win32-arm64-msvc')
           }
@@ -102,10 +102,10 @@ switch (platform) {
     }
     break
   case 'darwin':
-    localFileExisted = existsSync(join(__dirname, 'index.darwin-universal.node'))
+    localFileExisted = existsSync(join(__dirname, '@devinmdavies/eslint-barrel-file-utils.darwin-universal.node'))
     try {
       if (localFileExisted) {
-        nativeBinding = require('./index.darwin-universal.node')
+        nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.darwin-universal.node')
       } else {
         nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-darwin-universal')
       }
@@ -113,10 +113,10 @@ switch (platform) {
     } catch {}
     switch (arch) {
       case 'x64':
-        localFileExisted = existsSync(join(__dirname, 'index.darwin-x64.node'))
+        localFileExisted = existsSync(join(__dirname, '@devinmdavies/eslint-barrel-file-utils.darwin-x64.node'))
         try {
           if (localFileExisted) {
-            nativeBinding = require('./index.darwin-x64.node')
+            nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.darwin-x64.node')
           } else {
             nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-darwin-x64')
           }
@@ -125,10 +125,10 @@ switch (platform) {
         }
         break
       case 'arm64':
-        localFileExisted = existsSync(join(__dirname, 'index.darwin-arm64.node'))
+        localFileExisted = existsSync(join(__dirname, '@devinmdavies/eslint-barrel-file-utils.darwin-arm64.node'))
         try {
           if (localFileExisted) {
-            nativeBinding = require('./index.darwin-arm64.node')
+            nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.darwin-arm64.node')
           } else {
             nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-darwin-arm64')
           }
@@ -144,10 +144,10 @@ switch (platform) {
     if (arch !== 'x64') {
       throw new Error(`Unsupported architecture on FreeBSD: ${arch}`)
     }
-    localFileExisted = existsSync(join(__dirname, 'index.freebsd-x64.node'))
+    localFileExisted = existsSync(join(__dirname, '@devinmdavies/eslint-barrel-file-utils.freebsd-x64.node'))
     try {
       if (localFileExisted) {
-        nativeBinding = require('./index.freebsd-x64.node')
+        nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.freebsd-x64.node')
       } else {
         nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-freebsd-x64')
       }
@@ -159,10 +159,10 @@ switch (platform) {
     switch (arch) {
       case 'x64':
         if (isMusl()) {
-          localFileExisted = existsSync(join(__dirname, 'index.linux-x64-musl.node'))
+          localFileExisted = existsSync(join(__dirname, '@devinmdavies/eslint-barrel-file-utils.linux-x64-musl.node'))
           try {
             if (localFileExisted) {
-              nativeBinding = require('./index.linux-x64-musl.node')
+              nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.linux-x64-musl.node')
             } else {
               nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-linux-x64-musl')
             }
@@ -170,10 +170,10 @@ switch (platform) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(join(__dirname, 'index.linux-x64-gnu.node'))
+          localFileExisted = existsSync(join(__dirname, '@devinmdavies/eslint-barrel-file-utils.linux-x64-gnu.node'))
           try {
             if (localFileExisted) {
-              nativeBinding = require('./index.linux-x64-gnu.node')
+              nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.linux-x64-gnu.node')
             } else {
               nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-linux-x64-gnu')
             }
@@ -184,10 +184,10 @@ switch (platform) {
         break
       case 'arm64':
         if (isMusl()) {
-          localFileExisted = existsSync(join(__dirname, 'index.linux-arm64-musl.node'))
+          localFileExisted = existsSync(join(__dirname, '@devinmdavies/eslint-barrel-file-utils.linux-arm64-musl.node'))
           try {
             if (localFileExisted) {
-              nativeBinding = require('./index.linux-arm64-musl.node')
+              nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.linux-arm64-musl.node')
             } else {
               nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-linux-arm64-musl')
             }
@@ -195,10 +195,10 @@ switch (platform) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(join(__dirname, 'index.linux-arm64-gnu.node'))
+          localFileExisted = existsSync(join(__dirname, '@devinmdavies/eslint-barrel-file-utils.linux-arm64-gnu.node'))
           try {
             if (localFileExisted) {
-              nativeBinding = require('./index.linux-arm64-gnu.node')
+              nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.linux-arm64-gnu.node')
             } else {
               nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-linux-arm64-gnu')
             }
@@ -209,10 +209,12 @@ switch (platform) {
         break
       case 'arm':
         if (isMusl()) {
-          localFileExisted = existsSync(join(__dirname, 'index.linux-arm-musleabihf.node'))
+          localFileExisted = existsSync(
+            join(__dirname, '@devinmdavies/eslint-barrel-file-utils.linux-arm-musleabihf.node'),
+          )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./index.linux-arm-musleabihf.node')
+              nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.linux-arm-musleabihf.node')
             } else {
               nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-linux-arm-musleabihf')
             }
@@ -220,10 +222,12 @@ switch (platform) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(join(__dirname, 'index.linux-arm-gnueabihf.node'))
+          localFileExisted = existsSync(
+            join(__dirname, '@devinmdavies/eslint-barrel-file-utils.linux-arm-gnueabihf.node'),
+          )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./index.linux-arm-gnueabihf.node')
+              nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.linux-arm-gnueabihf.node')
             } else {
               nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-linux-arm-gnueabihf')
             }
@@ -234,10 +238,12 @@ switch (platform) {
         break
       case 'riscv64':
         if (isMusl()) {
-          localFileExisted = existsSync(join(__dirname, 'index.linux-riscv64-musl.node'))
+          localFileExisted = existsSync(
+            join(__dirname, '@devinmdavies/eslint-barrel-file-utils.linux-riscv64-musl.node'),
+          )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./index.linux-riscv64-musl.node')
+              nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.linux-riscv64-musl.node')
             } else {
               nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-linux-riscv64-musl')
             }
@@ -245,10 +251,12 @@ switch (platform) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(join(__dirname, 'index.linux-riscv64-gnu.node'))
+          localFileExisted = existsSync(
+            join(__dirname, '@devinmdavies/eslint-barrel-file-utils.linux-riscv64-gnu.node'),
+          )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./index.linux-riscv64-gnu.node')
+              nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.linux-riscv64-gnu.node')
             } else {
               nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-linux-riscv64-gnu')
             }
@@ -258,10 +266,10 @@ switch (platform) {
         }
         break
       case 's390x':
-        localFileExisted = existsSync(join(__dirname, 'index.linux-s390x-gnu.node'))
+        localFileExisted = existsSync(join(__dirname, '@devinmdavies/eslint-barrel-file-utils.linux-s390x-gnu.node'))
         try {
           if (localFileExisted) {
-            nativeBinding = require('./index.linux-s390x-gnu.node')
+            nativeBinding = require('./@devinmdavies/eslint-barrel-file-utils.linux-s390x-gnu.node')
           } else {
             nativeBinding = require('@devinmdavies/eslint-barrel-file-utils-linux-s390x-gnu')
           }
