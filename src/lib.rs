@@ -162,6 +162,16 @@ pub fn count_module_graph_size_rs(
   }
 
   while let Some(dep) = modules.pop() {
+    let allocator = Allocator::default();
+    let path = PathBuf::from(&base_path).join(&dep);
+
+    if path.extension().unwrap() == "css"
+      || path.extension().unwrap() == "json"
+      || path.extension().unwrap() == "png"
+    {
+      continue;
+    }
+
     let source = match std::fs::read_to_string(PathBuf::from(&base_path).join(&dep)) {
       Ok(source) => source,
       Err(_) => {
@@ -172,11 +182,6 @@ pub fn count_module_graph_size_rs(
       }
     };
 
-    let allocator = Allocator::default();
-    let path = PathBuf::from(&base_path).join(&dep);
-    if path.extension().unwrap() == "css" || path.extension().unwrap() == "json" {
-      continue;
-    }
     let source_type = SourceType::from_path(PathBuf::from(&base_path).join(&dep)).unwrap();
     let ret = Parser::new(&allocator, &source, source_type).parse();
     let ModuleLexer { imports, .. } = ModuleLexer::new().build(&ret.program);
