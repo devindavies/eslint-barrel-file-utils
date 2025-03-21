@@ -168,6 +168,16 @@ pub fn count_module_graph_size_rs(
     if path.extension().unwrap() == "css"
       || path.extension().unwrap() == "json"
       || path.extension().unwrap() == "png"
+      || path.extension().unwrap() == "jpg"
+      || path.extension().unwrap() == "jpeg"
+      || path.extension().unwrap() == "gif"
+      || path.extension().unwrap() == "svg"
+      || path.extension().unwrap() == "webp"
+      || path.extension().unwrap() == "ico"
+      || path.extension().unwrap() == "bmp"
+      || path.extension().unwrap() == "tiff"
+      || path.extension().unwrap() == "avif"
+      || path.extension().unwrap() == "pgm"
     {
       continue;
     }
