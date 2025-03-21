@@ -194,9 +194,28 @@ pub fn count_module_graph_size_rs(
       }
 
       let importer = PathBuf::from(&base_path).join(&dep);
-      let resolved_url = resolver
-        .resolve(importer.parent().unwrap().to_str().unwrap(), &importee)
-        .unwrap();
+      let parent_path = match importer.parent().unwrap().to_str() {
+        Some(path) => path,
+        None => {
+          return Err(Error::new(
+            GenericFailure,
+            format!("Failed to get parent path of: \"{}\"", &importer.display()),
+          ));
+        }
+      };
+      let resolved_url = match resolver.resolve(parent_path, &importee) {
+        Ok(url) => url,
+        Err(_) => {
+          return Err(Error::new(
+            GenericFailure,
+            format!(
+              "Failed to resolve importer: \"{}\", importee: \"{}\"",
+              &importer.display(),
+              &importee
+            ),
+          ));
+        }
+      };
 
       let path_to_dependency = diff_paths(resolved_url.path(), &base_path).unwrap();
       let path_to_dependency_str = path_to_dependency.to_str().unwrap().to_string();
