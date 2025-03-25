@@ -23,14 +23,24 @@ pub fn is_bare_module_specifier(specifier: &str) -> bool {
 
 #[napi]
 pub fn resolve_rs(
-  env: Env,
+  _env: Env,
   importer: String,
   importee: String,
   condition_names: Vec<String>,
   main_fields: Vec<String>,
   extensions: Vec<String>,
+  tsconfig_config_file: Option<String>,
+  tsconfig_references: Option<Vec<String>>,
 ) -> Result<String> {
+  let tsconfig = match tsconfig_config_file {
+    None => None,
+    _ => Some(create_tsconfig_option(
+      tsconfig_config_file.unwrap(),
+      tsconfig_references,
+    )),
+  };
   let options: ResolveOptions = ResolveOptions {
+    tsconfig,
     condition_names,
     main_fields,
     extensions,
@@ -58,7 +68,7 @@ pub fn resolve_rs(
 
 #[napi]
 pub fn is_barrel_file_rs(
-  env: Env,
+  _env: Env,
   source: String,
   amount_of_exports_to_consider_module_as_barrel: u32,
 ) -> Result<bool> {
@@ -120,12 +130,13 @@ fn create_alias_option(aliases: Vec<(String, Vec<String>)>) -> Vec<(String, Vec<
 
 #[napi]
 pub fn count_module_graph_size_rs(
-  env: Env,
+  _env: Env,
   entry_points: Vec<String>,
   base_path: String,
   condition_names: Vec<String>,
   main_fields: Vec<String>,
   extensions: Vec<String>,
+  ignore_module_extensions: Vec<String>,
   builtin_modules: Vec<String>,
   tsconfig_config_file: Option<String>,
   tsconfig_references: Option<Vec<String>>,
@@ -165,20 +176,9 @@ pub fn count_module_graph_size_rs(
     let allocator = Allocator::default();
     let path = PathBuf::from(&base_path).join(&dep);
 
-    if path.extension().unwrap() == "css"
-      || path.extension().unwrap() == "json"
-      || path.extension().unwrap() == "png"
-      || path.extension().unwrap() == "jpg"
-      || path.extension().unwrap() == "jpeg"
-      || path.extension().unwrap() == "gif"
-      || path.extension().unwrap() == "svg"
-      || path.extension().unwrap() == "webp"
-      || path.extension().unwrap() == "ico"
-      || path.extension().unwrap() == "bmp"
-      || path.extension().unwrap() == "tiff"
-      || path.extension().unwrap() == "avif"
-      || path.extension().unwrap() == "pgm"
-    {
+    let module_extension = path.extension().unwrap().to_str().unwrap();
+
+    if ignore_module_extensions.contains(&module_extension.to_string()) {
       continue;
     }
 
