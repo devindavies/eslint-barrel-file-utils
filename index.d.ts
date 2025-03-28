@@ -9,6 +9,8 @@ export declare function resolveRs(
   conditionNames: Array<string>,
   mainFields: Array<string>,
   extensions: Array<string>,
+  tsconfigConfigFile?: string | undefined | null,
+  tsconfigReferences?: Array<string> | undefined | null,
 ): string
 export declare function isBarrelFileRs(source: string, amountOfExportsToConsiderModuleAsBarrel: number): boolean
 export declare function countModuleGraphSizeRs(
@@ -17,6 +19,7 @@ export declare function countModuleGraphSizeRs(
   conditionNames: Array<string>,
   mainFields: Array<string>,
   extensions: Array<string>,
+  ignoreModuleExtensions: Array<string>,
   builtinModules: Array<string>,
   tsconfigConfigFile: string | undefined | null,
   tsconfigReferences: Array<string> | undefined | null,
