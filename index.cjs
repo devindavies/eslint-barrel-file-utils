@@ -1,3 +1,4 @@
+const { default: ts } = require('typescript');
 const {
   countModuleGraphSizeRs: count_module_graph_size_rs,
   isBarrelFileRs: is_barrel_file,
@@ -16,11 +17,14 @@ const { builtinModules } = require("module");
 * @returns {string} the resolved path to the module
 */
 function resolve(importer, importee, options) {
- const mainFields = options?.mainFields || ["module", "browser", "main"];
- const exportConditions = options?.exportConditions || ["node", "import"];
- const extensions = options?.extensions || [".js", ".ts", ".tsx", ".jsx", ".json", ".node"];
+  const mainFields = options?.mainFields || ["module", "browser", "main"];
+  const exportConditions = options?.exportConditions || ["node", "import"];
+  const extensions = options?.extensions || [".js", ".ts", ".tsx", ".jsx", ".json", ".node"];
 
- return resolve_rs(importer, importee, exportConditions, mainFields, extensions);
+  const tsConfigFile = options?.tsconfig?.configFile;
+  const tsReferences = options?.tsconfig?.references;
+
+  return resolve_rs(importer, importee, exportConditions, mainFields, extensions, tsConfigFile, tsReferences);
 }
 
 /**
@@ -34,36 +38,38 @@ function resolve(importer, importee, options) {
 * @returns {number}
 */
 function count_module_graph_size(entrypoints, options = {}) {
- const {
-   basePath = process.cwd(),
-   exportConditions = ["node", "import"],
-   mainFields = ["module", "browser", "main"],
-   extensions = [".js", ".ts", ".tsx", ".jsx", ".json", ".node"],
-   tsconfig,
- } = options;
+  const {
+    basePath = process.cwd(),
+    exportConditions = ["node", "import"],
+    mainFields = ["module", "browser", "main"],
+    extensions = [".js", ".ts", ".tsx", ".jsx", ".json", ".node"],
+    ignoreModuleExtensions,
+    tsconfig,
+  } = options;
 
- const tsConfigFile = tsconfig?.configFile;
- const tsReferences = tsconfig?.references;
- 
- // alias is expected to be a vector
- let alias = options.alias ?? [];
- if (options.alias && typeof options.alias === "object") {
+  const tsConfigFile = tsconfig?.configFile;
+  const tsReferences = tsconfig?.references;
+
+  // alias is expected to be a vector
+  let alias = options.alias ?? [];
+  if (options.alias && typeof options.alias === "object") {
     alias = Object.entries(options.alias);
- }
- 
- const processedEntrypoints = (typeof entrypoints === "string" ? [entrypoints] : entrypoints);
- const result = count_module_graph_size_rs(
-   processedEntrypoints, 
-   basePath, 
-   exportConditions, 
-   mainFields,
-   extensions,
-   builtinModules,
-   tsConfigFile,
-   tsReferences,
-   alias
- );
- return result;
+  }
+
+  const processedEntrypoints = (typeof entrypoints === "string" ? [entrypoints] : entrypoints);
+  const result = count_module_graph_size_rs(
+    processedEntrypoints,
+    basePath,
+    exportConditions,
+    mainFields,
+    extensions,
+    ignoreModuleExtensions,
+    builtinModules,
+    tsConfigFile,
+    tsReferences,
+    alias
+  );
+  return result;
 }
 
 module.exports = {

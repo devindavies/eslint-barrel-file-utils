@@ -19,8 +19,10 @@ export function resolve(importer, importee, options) {
   const mainFields = options?.mainFields || ["module", "browser", "main"];
   const exportConditions = options?.exportConditions || ["node", "import"];
   const extensions = options?.extensions || [".js", ".ts", ".tsx", ".jsx", ".json", ".node"];
+  const tsConfigFile = options?.tsconfig?.configFile;
+  const tsReferences = options?.tsconfig?.references;
 
-  return resolve_rs(importer, importee, exportConditions, mainFields, extensions);
+  return resolve_rs(importer, importee, exportConditions, mainFields, extensions, tsConfigFile, tsReferences);
 }
 
 /**
