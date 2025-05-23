@@ -13,13 +13,13 @@ crate-type = ["cdylib"]
 napi = "2"
 regex = "1.10.3"
 napi-derive = "2"
-oxc_parser = "0.13.0"
-oxc_allocator = "0.13.0"
-oxc_module_lexer = "0.13.0"
-oxc_span = "0.13.0"
-oxc_resolver = { version = "1.7.0", features = ["package_json_raw_json_api"] }
+oxc_parser = "0.38.0"
+oxc_allocator = "0.38.0"
+oxc_module_lexer = "0.38.0"
+oxc_span = "0.38.0"
+oxc_resolver = { version = "10.0.0", features = ["package_json_raw_json_api"] }
 pathdiff = "0.2.1"
-oxc_ast = "0.13.0"
+oxc_ast = "0.38.0"
 
 [build-dependencies]
 napi-build = "2"
