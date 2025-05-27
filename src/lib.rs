@@ -220,13 +220,14 @@ pub fn count_module_graph_size_rs(
       };
       let resolved_url = match resolver.resolve(parent_path, &importee) {
         Ok(url) => url,
-        Err(_) => {
+        Err(resolve_error) => {
           return Err(Error::new(
             GenericFailure,
             format!(
-              "Failed to resolve importer: \"{}\", importee: \"{}\"",
+              "Failed to resolve importer: \"{}\", importee: \"{}\", message: \"{}\"",
               &importer.display(),
-              &importee
+              &importee,
+              resolve_error
             ),
           ));
         }
