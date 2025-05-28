@@ -3,7 +3,7 @@ use napi::{Env, Error, Result};
 use napi_derive::napi;
 use oxc_allocator::Allocator;
 use oxc_ast::ast::Statement;
-use oxc_module_lexer::ModuleLexer;
+use oxc_module_lexer::{ImportType::ExportStar, ModuleLexer};
 use oxc_parser::Parser;
 use oxc_resolver::{AliasValue, ResolveOptions, Resolver, TsconfigOptions, TsconfigReferences};
 use oxc_span::SourceType;
@@ -203,7 +203,7 @@ pub fn count_module_graph_size_rs(
         continue;
       }
 
-      if import.t {
+      if import.t | (import.d == ExportStar) {
         continue;
       }
       let importee = import.n.unwrap().to_string();
