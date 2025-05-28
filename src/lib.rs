@@ -202,6 +202,10 @@ pub fn count_module_graph_size_rs(
       if import.n.is_none() {
         continue;
       }
+
+      if import.t {
+        continue;
+      }
       let importee = import.n.unwrap().to_string();
 
       if builtin_modules.contains(&importee.replace("node:", "")) {
@@ -224,10 +228,11 @@ pub fn count_module_graph_size_rs(
           return Err(Error::new(
             GenericFailure,
             format!(
-              "Failed to resolve importer: \"{}\", importee: \"{}\", message: \"{}\"",
+              "Failed to resolve importer: \"{}\", importee: \"{}\", parent_path: \"{}\", message: \"{}\"",
               &importer.display(),
               &importee,
-              resolve_error
+              &parent_path,
+              &resolve_error
             ),
           ));
         }
