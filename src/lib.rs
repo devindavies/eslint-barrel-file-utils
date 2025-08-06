@@ -3,7 +3,6 @@ use napi::{Env, Error, Result};
 use napi_derive::napi;
 use oxc_allocator::Allocator;
 use oxc_ast::ast::Statement;
-use oxc_module_lexer::{ImportType::ExportStar, ModuleLexer};
 use oxc_parser::Parser;
 use oxc_resolver::{AliasValue, ResolveOptions, Resolver, TsconfigOptions, TsconfigReferences};
 use oxc_span::SourceType;
@@ -11,6 +10,10 @@ use pathdiff::diff_paths;
 use regex::Regex;
 use std::collections::HashSet;
 use std::path::PathBuf;
+
+use crate::lexer::ModuleLexer;
+
+mod lexer;
 
 pub fn is_bare_module_specifier(specifier: &str) -> bool {
   let specifier = specifier.replace('\'', "");
@@ -203,7 +206,7 @@ pub fn count_module_graph_size_rs(
         continue;
       }
 
-      if import.t | (import.d == ExportStar) {
+      if import.t {
         continue;
       }
       let importee = import.n.unwrap().to_string();
@@ -228,11 +231,13 @@ pub fn count_module_graph_size_rs(
           return Err(Error::new(
             GenericFailure,
             format!(
-              "Failed to resolve importer: \"{}\", importee: \"{}\", parent_path: \"{}\", message: \"{}\"",
+              "Failed to resolve importer: \"{}\", importee: \"{}\", parent_path: \"{}\", message: \"{}\", import.ss: \"{:?}\", import.se: \"{:?}\"",
               &importer.display(),
               &importee,
               &parent_path,
-              &resolve_error
+              &resolve_error,
+              &import.ss,
+              &import.se
             ),
           ));
         }
